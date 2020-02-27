@@ -1,0 +1,3 @@
+[submodule "rmtest"]
+	path = rmtest
+	url = ./rmtest
