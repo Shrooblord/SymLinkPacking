@@ -3,7 +3,9 @@
 printf 'Unpacking repo...\n'
 printf 'If the next line reads "DONE!", something went wrong.\n'
 
-git submodule foreach --recursive git ls-files -s | $(
+git submodule foreach --recursive "$(cat <<'ETX'
+__git_unpack_symlinks() {
+
   case "$1" in (-h)
     printf 'usage: git unpack-symlinks [symlink] [symlink] [...]\n'
     return 0
@@ -47,6 +49,9 @@ git submodule foreach --recursive git ls-files -s | $(
   '
 
   printf '\n'
-)
+}
+__git_unpack_symlinks
+ETX
+)"
 
 read -p "DONE! Press [ENTER] to exit."
