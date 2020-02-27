@@ -1,5 +1,9 @@
 #!/bin/bash
 
+printf 'Repacking repo...\n'
+printf 'If the next line reads "DONE!", something went wrong.\n'
+
+git submodule foreach --recursive git ls-files -s | $(
   case "$1" in (-h)
     printf 'usage: git repack-symlinks [symlink] [symlink] [...]\n'
     return 0
@@ -14,6 +18,10 @@
     git checkout -- "$symlink"
     printf 'Restored git symlink: %s -> %s\n' "$symlink" "$(cat "$symlink")"
   done
+  
+  printf '\n'
+)
+
 
 
 read -p "DONE! Press [ENTER] to exit."
