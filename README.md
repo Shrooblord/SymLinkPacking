@@ -43,7 +43,7 @@ Imagine the following folder structure:
 ```
 MySource/
         |--ImportantFolder/
-		|--source.txt
+	|--source.txt
 MyTarget/
 ```
 We wish to include a symlink of `MySource/source.txt` in `MyTarget`, and also a symlink to `MySource/ImportantFolder` in `MyTarget`. To do this, we run the `add-symlink.sh` script twice.
@@ -56,9 +56,9 @@ The resulting file structure will look like this:
 ```
 MySource/
         |--ImportantFolder/
-		|--source.txt
+	|--source.txt
 MyTarget/
         |--ImportantFolder*/
-		|--source.txt*
+	|--source.txt*
 ```
 where the `source.txt` file and `ImportantFolder` within `MyTarget` are symlinks, not actual files.
