@@ -37,3 +37,28 @@ Git commands adapted from Mark G., courtesy of [this](https://stackoverflow.com/
 
 For your information, the symlinks created are always symlinks while in "git form" (`git add-symlink` or `git submodule foreach --recursive git repack-symlinks` (or: `git rp-symlinks-recur`)), are a hardlink for files while in "Windows form", and are symlinks for directories while in "Windows form" (`git submodule foreach --recursive git unpack-symlinks` (or: `git up-symlinks-recur`)).
 
+### Example Use of add-symlink.sh
+We run `add-symlink.sh` and are presented with two questions: what is the source file or directory, and what is the target location to put the created symlink?
+Imagine the following folder structure:
+```
+MySource/
+        |--ImportantFolder/
+		|--source.txt
+MyTarget/
+```
+We wish to include a symlink of `MySource/source.txt` in `MyTarget`, and also a symlink to `MySource/ImportantFolder` in `MyTarget`. To do this, we run the `add-symlink.sh` script twice.
+
+The first time, when prompted for a source location, we type `../MySource/source.txt`. For the target, we type `MyTarget/source.txt`. This will create a symlink in `MyTarget` to the `MySource/source.txt` file.
+
+On the second run, we instead enter the following for source and target, respectively: `../MySource/ImportantFolder`, then `MyTarget/ImportantFolder`. This will create a symlink in `MyTarget` to the `MySource/ImportantFolder` directory.
+
+The resulting file structure will look like this:
+```
+MySource/
+        |--ImportantFolder/
+		|--source.txt
+MyTarget/
+        |--ImportantFolder*/
+		|--source.txt*
+```
+where the `source.txt` file and `ImportantFolder` within `MyTarget` are symlinks, not actual files.
